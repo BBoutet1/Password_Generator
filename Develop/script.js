@@ -15,10 +15,13 @@ function writePassword() {
 // This function generate a secured password followinf characters criteria
 function generatePassword(){
 
-    // password length selected by the user
+    // password length selected by the user from 6 to 26 characters
 var numberOfChar = prompt("Please, enter the desired number of characters");
-console.log("number of characters:"+numberOfChar);
-
+if (numberOfChar<8 || numberOfChar>28){ 
+alert("Your password should contains 8 to 26 characters. Please try again!")
+return passwordText;
+}
+else {
   // 1 array for each of the 4 types of character
 var alphaLower = []; // Lower case array
 var alphaUpper = []; // Upper case array
@@ -31,10 +34,8 @@ for (i=0; i<26; i++){ // filling alphaLower and lphaUpper using unicode
 alphaLower.push(String.fromCharCode(j)); //
 alphaUpper.push(String.fromCharCode(k));
 
-
 // Merging all the 4 arrays in one big array
 var totalChar = alphaLower.concat(alphaUpper, number,specialChar);
-
 
 
 // randomly generated password
@@ -45,6 +46,7 @@ for (j=0; j<numberOfChar; j++){
   securedPassword = securedPassword + totalChar[random];}
 }
 return securedPassword;
+}
 }
 
 // Add event listener to generate button
