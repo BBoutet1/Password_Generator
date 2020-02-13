@@ -14,29 +14,32 @@ function writePassword() {
 
 
 
-// Generation of alphabet arrays (upper and lower)
+// 1 array for each of the 4 types of character
 var alphaLower = []; // Lower case array
-var alphaUpper = []; // Upeer case
+var alphaUpper = []; // Upper case array
 var number = [0,1,2,3,4,5,6,7,8,9]; // digit array
 var specialChar = ("!#$%&'()*+-/<=>?@[\]^_`{|}~").split(""); // Special character array
-
-
-
 var i;
-
-for (i=0; i<26; i++){
+for (i=0; i<26; i++){ // filling alphaLower and lphaUpper using unicode
  var j=i+97;
  var k=i+65;
-alphaLower.push(String.fromCharCode(j)); // String.fromCharCode(String.fromCharCode(j))
+alphaLower.push(String.fromCharCode(j)); //
 alphaUpper.push(String.fromCharCode(k));
 
 }
 
 
-console.log("["+alphaLower+ "]");
-console.log("["+ alphaUpper+ "]");
-console.log("["+ number+ "]");
-console.log("["+ specialChar+"]");
+// Merging all the 4 arrays in one big array
+var totalChar = alphaLower.concat(alphaUpper, number,specialChar);
+console.log(totalChar);
+
+// 
+
+
+
+
+
+
 
 
 function generatePassword(){
