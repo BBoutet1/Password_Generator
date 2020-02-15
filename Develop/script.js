@@ -11,16 +11,22 @@ function writePassword() {
 
 // This function generate a secured password following characters criteria
 function generatePassword(){
+var numberOfChar = prompt("Please, enter the desired number of characters"); // password characters length
 
-// Password length should be between 8 and 26 characters
-var numberOfChar = prompt("Please, enter the desired number of characters");
-if( numberOfChar==null) { // if no value is entered
-  alert("Number of characters: no input value")
+if (Number.isInteger(numberOfChar)===false || numberOfChar<0){ // If the length input is not a positive integer
+  alert("Password length is a positive integer. Please try again!")
+  passwordText = document.querySelector("#password").innerHTML;// Password text reset
+  return passwordText;
+  console.log(posInteger);
+}
+
+else if( numberOfChar==null) { // if no value is entered
+  alert("Missing number of characters input")
   passwordText = document.querySelector("#password").innerHTML;// Password text reset
   return passwordText;
   console.log(numberOfChar);
 }
-else if ((numberOfChar<8 || numberOfChar>28) && !(numberOfChar==null)){ // password length out of [8,26]  range 
+else if ((numberOfChar<8 || numberOfChar>28) && !(numberOfChar==null)){ // password length out of [8,26] range 
 alert("Your password should contains 8 to 26 characters. Please try again!")
 passwordText = document.querySelector("#password").innerHTML;// Password text reset in display field
 return passwordText;
@@ -41,10 +47,10 @@ alphaUpper.push(String.fromCharCode(k));
 // Merging user selected array in one big array
 alert("Select at least 3 types of caracters");
 var totalChar = []; // merger array
-var lowerChar = confirm("Lower case characters: "+alphaLower);
-var upperChar = confirm("Upper case characters: "+alphaUpper);
-var numChar = confirm("Digital characters: "+number); 
-var speChar = confirm("Special characters: "+specialChar); 
+var lowerChar = confirm("Lower case characters: a~z");
+var upperChar = confirm("Upper case characters: A~Z ");
+var numChar = confirm("Digital characters: 0~9"); 
+var speChar = confirm("Special characters: !#$%&"); 
 
 
 var numOftypes=0; // Number of selected type of caracter
