@@ -26,7 +26,7 @@ function generatePassword(){
     return passwordText;
   }
   else if ((numberOfChar<8 || numberOfChar>128) && !(numberOfChar==null)){ // password length out of range 
-    alert("Wrong entry: your password should contains 8 characters minimum to 128 maximum . Please try again!")
+    alert("Wrong entry: your password should contains at least 8 characters and no more than 128 characters. Please try again!")
     passwordText = document.querySelector("#password").innerHTML;// Password not displayed
     return passwordText;
   } 
@@ -79,101 +79,97 @@ function generatePassword(){
       return passwordText;
     }
     else { // at least 3 types of characters selected: password can be generated
+        var securePassword;
         while(!(checkLower && checkUpper && checkNum && checkSpe)){ //The random password is recorded only each selected type is included
-        var securePassword = ""; 
-        for (j=0; j<numberOfChar; j++){
-          var random = Math.floor(Math.random() * totalChar.length);
-          securePassword = securePassword + totalChar[random];
-
-          // This part below checks if each secleted type has at least one character in the random password
-          /*****************************************************************************************/
-          var passArray =securePassword.split(""); // converting the password  characters list in an array 
-          //Checking if at least 1  lower case character
-          var checkLower=true;
-          if (lowerChar===true) {
-            for (i=0; i<alphaLower.length; i++){
-              for(j=0; j<passArray.length; j++){
+              securePassword = "";
+              for (j=0; j<numberOfChar; j++){
+              var random = Math.floor(Math.random() * totalChar.length);
+              securePassword = securePassword + totalChar[random];
+              }
+              // This part below checks if each secleted type has at least one character in the random password
+              /*****************************************************************************************/
+              var passArray =securePassword.split(""); // converting the password  characters list in an array 
+              //Checking if at least 1  lower case character
+              var checkLower=true;
+              if (lowerChar===true) {
+                for (i=0; i<alphaLower.length; i++){
+                  for(j=0; j<passArray.length; j++){
+                      if(alphaLower[i]==passArray[j]){
+                        checkLower=true
+                        break;
+                      }
+                  }
                   if(alphaLower[i]==passArray[j]){
-                    checkLower=true
-                    break;
+                      break;
                   }
+                  else{
+                    checkLower=false
+                  }  
                 }
-                if(alphaLower[i]==passArray[j]){
-                  break;
-                }
-                else{
-                checkLower=false
-                }  
               }
-            }
-          //Checking if at least 1  upper case character
-          var checkUpper=true; 
-          if (upperChar===true) {
-            for (i=0; i<alphaUpper.length; i++){
-              for(j=0; j<passArray.length; j++){
+              //Checking if at least 1  upper case character
+              var checkUpper=true; 
+              if (upperChar===true) {
+                for (i=0; i<alphaUpper.length; i++){
+                  for(j=0; j<passArray.length; j++){
+                      if(alphaUpper[i]==passArray[j]){
+                        checkUpper=true
+                        break;
+                      }
+                    }
                   if(alphaUpper[i]==passArray[j]){
-                    checkUpper=true
-                    break;
+                      break;
                   }
+                  else{
+                    checkUpper=false
+                  }  
                 }
-                if(alphaUpper[i]==passArray[j]){
-                  break;
-                }
-                else{
-                checkUpper=false
-                }  
-              }
-            } 
+              } 
 
-          //Checking if at least 1  digital character
-          var checkNum=true;
-          if (numChar===true) {
-            for (i=0; i<number.length; i++){
-              for(j=0; j<passArray.length; j++){
+              //Checking if at least 1  digital character
+              var checkNum=true;
+              if (numChar===true) {
+                for (i=0; i<number.length; i++){
+                  for(j=0; j<passArray.length; j++){
+                      if(number[i]==passArray[j]){
+                        checkNum=true
+                        break;
+                      }
+                    }
                   if(number[i]==passArray[j]){
-                    checkNum=true
-                    break;
+                     break;
                   }
-                }
-                if(number[i]==passArray[j]){
-                  break;
-                }
-                else{
-                checkNum=false
+                  else{
+                   checkNum=false
+                  }
                 }  
               }
-            } 
-          //Checking if at least 1  special character
-          var checkSpe=true;
-          if (speChar===true) {
-            for (i=0; i<specialChar.length; i++){
-              for(j=0; j<passArray.length; j++){
+              //Checking if at least 1  special character
+              var checkSpe=true;
+              if (speChar===true) {
+                for (i=0; i<specialChar.length; i++){
+                  for(j=0; j<passArray.length; j++){
+                      if(specialChar[i]==passArray[j]){
+                        checkSpe=true
+                        break;
+                      }
+                    }
                   if(specialChar[i]==passArray[j]){
-                    checkSpe=true
-                    break;
+                      break;
                   }
+                  else{
+                    checkSpe=false
+                  }  
                 }
-                if(specialChar[i]==passArray[j]){
-                  break;
-                }
-                else{
-                checkSpe=false
-                }  
-              }
-            } 
-        /*******************************************************************/
-        } //End for
+              } 
+            /*******************************************************************/
+            } //End for
       } // end While
-    return securePassword;
-  }
+      
+   }
+   return securePassword;
 }
 // Add event listener to generate button
 generateBtn.addEventListener("click",function(){
   writePassword()
 });
-
-
-
-
-
-
