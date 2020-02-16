@@ -25,7 +25,7 @@ else if( numberOfChar==null) { // if no value is entered
   passwordText = document.querySelector("#password").innerHTML;// Password text reset
   return passwordText;
 }
-else if ((numberOfChar<8 || numberOfChar>28) && !(numberOfChar==null)){ // password length out of [8,26] range 
+else if ((numberOfChar<1 || numberOfChar>28) && !(numberOfChar==null)){ // password length out of [8,26] range 
 alert("Your password should contains 8 to 26 characters. Please try again!")
 passwordText = document.querySelector("#password").innerHTML;// Password text reset in display field
 return passwordText;
@@ -73,85 +73,120 @@ if (speChar===true) {
 }
 
 
-//Check if criteria are met (at least one character of each selected type)
-
-if(lowerChar){
-  function lowerCriteria(){
-     for (i=0; i<alphaLower.length;i++){
-        for (j=0; j<totalChar.length;i++){
-          if(alphaLower[i]=totalChar[j]) {
-            break;
-          }
-          (alphaLower[i]=totalChar[j]);
-        } 
-   }
-  }
-  }
-
-  if(upperChar){
-    function upperCriteria(){
-       for (i=0; i<alphaUpper.length;i++){
-          for (j=0; j<totalChar.length;i++){
-            if(alphaUpper[i]=totalChar[j]) {
-              break;
-            }
-            (alphaUpper[i]=totalChar[j]);
-          } 
-     }
-    }  
-    }
-
-    if(numChar){
-      function numCriteria(){
-         for (i=0; i<number.length;i++){
-            for (j=0; j<totalChar.length;i++){
-              if(number[i]=totalChar[j]) {
-                break;
-              }
-              (number[i]=totalChar[j]);
-            } 
-       }
-      }
-      }
-
-      if(speChar){
-        function numCriteria(){
-           for (i=0; i<specialChar.length;i++){
-              for (j=0; j<totalChar.length;i++){
-                if(specialChar[i]=totalChar[j]) {
-                  break;
-                }
-                (specialChar[i]=totalChar[j]);
-              } 
-         }
-        }
-        }
-
-  
-
-
- 
-
-
-
 //User should chose 3 types of characters at least to generate a secure password
 if (numOftypes<3){ // if less than 3 types of characters have been selected
   alert("Your password must contains at least 3  types of characters. Please try again!")
   passwordText = document.querySelector("#password").innerHTML;// Password text reset in display field
   return passwordText;
 }
-else { // at least 3 types of characters selected
+else { // at least 3 types of characters selected password can be generated
 
-// randomly generating password
-var securedPassword = "";
+
+var securePassword = "";
+
+
+/****************************************************************/
+// This part checks if each secleted type has at least one character in the password
+var passArray =securePassword.split(""); // converting the password strig in array 
+
+//Checking if at least 1  lower case character when the type is selected
+var checkLower=true;
+if (lowerChar===true) {
+  for (i=0; i<alphaLower.length; i++){
+    for(j=0; j<passArray.length; j++){
+        if(alphaLower[i]==passArray[j]){
+          checkLower=true
+          break;
+        }
+      }
+      if(alphaLower[i]==passArray[j]){
+        checkLower=true
+        break;
+      }
+      else{
+      checkLower=false
+      }  
+    }
+  }
+
+//Checking if at least 1  upper case character when the type is selected
+var checkUpper=true; 
+if (upperChar===true) {
+  for (i=0; i<alphaUpper.length; i++){
+    for(j=0; j<passArray.length; j++){
+        if(alphaUpper[i]==passArray[j]){
+          checkLower=true
+          break;
+        }
+      }
+      if(alphaUpper[i]==passArray[j]){
+        checkLower=true
+        break;
+      }
+      else{
+      checkUpper=false
+      }  
+    }
+  } 
+
+//Checking if at least 1  digital character when the type is selected
+ var checkNum=true;
+ if (numChar===true) {
+   for (i=0; i<number.length; i++){
+     for(j=0; j<passArray.length; j++){
+         if(number[i]==passArray[j]){
+           checkLower=true
+           break;
+         }
+       }
+       if(number[i]==passArray[j]){
+         checkLower=true
+         break;
+       }
+       else{
+       checkNum=false
+       }  
+     }
+   } 
+//Checking if at least 1  special character when the type is selected
+ var checkSpe=true;
+ if (speChar===true) {
+   for (i=0; i<specialChar.length; i++){
+     for(j=0; j<passArray.length; j++){
+         if(specialChar[i]==passArray[j]){
+           checkLower=true
+           break;
+         }
+       }
+       if(specialChar[i]==passArray[j]){
+         checkSpe=true
+         break;
+       }
+       else{
+       checkSpe=false
+       }  
+     }
+   } 
+
+console.log("Lower criteria met: "+ checkLower);
+console.log("Upper criteria met: "+ checkUpper);
+console.log("Digital criteria met: "+ checkNum);
+console.log("Special criteria met: "+ checkSpe);
+
+/*******************************************************************/
+
+
+
 for (j=0; j<numberOfChar; j++){
  
   var random = Math.floor(Math.random() * totalChar.length);
-  securedPassword = securedPassword + totalChar[random];}
+  securePassword = securePassword + totalChar[random];}
 }
-return securedPassword;
+
+return securePassword;
 }
 }
+
 
 
 // Add event listener to generate button
