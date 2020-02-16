@@ -25,7 +25,7 @@ else if( numberOfChar==null) { // if no value is entered
   passwordText = document.querySelector("#password").innerHTML;// Password text reset
   return passwordText;
 }
-else if ((numberOfChar<1 || numberOfChar>28) && !(numberOfChar==null)){ // password length out of [8,26] range 
+else if ((numberOfChar<8 || numberOfChar>128) && !(numberOfChar==null)){ // password length out of [8,26] range 
 alert("Your password should contains 8 to 26 characters. Please try again!")
 passwordText = document.querySelector("#password").innerHTML;// Password text reset in display field
 return passwordText;
@@ -84,8 +84,13 @@ else { // at least 3 types of characters selected password can be generated
 
 var securePassword = "";
 
-
-/****************************************************************/
+// While: the random password is recorded only if selected characters criteria are met
+while(!(checkLower && checkUpper && checkNum && checkSpe)){  
+for (j=0; j<numberOfChar; j++){
+ 
+  var random = Math.floor(Math.random() * totalChar.length);
+  securePassword = securePassword + totalChar[random];}
+  /****************************************************************/
 // This part checks if each secleted type has at least one character in the password
 var passArray =securePassword.split(""); // converting the password strig in array 
 
@@ -100,7 +105,6 @@ if (lowerChar===true) {
         }
       }
       if(alphaLower[i]==passArray[j]){
-        checkLower=true
         break;
       }
       else{
@@ -115,12 +119,11 @@ if (upperChar===true) {
   for (i=0; i<alphaUpper.length; i++){
     for(j=0; j<passArray.length; j++){
         if(alphaUpper[i]==passArray[j]){
-          checkLower=true
+          checkUpper=true
           break;
         }
       }
       if(alphaUpper[i]==passArray[j]){
-        checkLower=true
         break;
       }
       else{
@@ -135,12 +138,11 @@ if (upperChar===true) {
    for (i=0; i<number.length; i++){
      for(j=0; j<passArray.length; j++){
          if(number[i]==passArray[j]){
-           checkLower=true
+           checkNum=true
            break;
          }
        }
        if(number[i]==passArray[j]){
-         checkLower=true
          break;
        }
        else{
@@ -154,12 +156,11 @@ if (upperChar===true) {
    for (i=0; i<specialChar.length; i++){
      for(j=0; j<passArray.length; j++){
          if(specialChar[i]==passArray[j]){
-           checkLower=true
+           checkSpe=true
            break;
          }
        }
        if(specialChar[i]==passArray[j]){
-         checkSpe=true
          break;
        }
        else{
@@ -172,16 +173,12 @@ console.log("Lower criteria met: "+ checkLower);
 console.log("Upper criteria met: "+ checkUpper);
 console.log("Digital criteria met: "+ checkNum);
 console.log("Special criteria met: "+ checkSpe);
+console.log(lowerChar +"/"+upperChar+"/"+numChar+"/"+speChar);
 
 /*******************************************************************/
-
-
-
-for (j=0; j<numberOfChar; j++){
- 
-  var random = Math.floor(Math.random() * totalChar.length);
-  securePassword = securePassword + totalChar[random];}
 }
+
+} // end While
 
 return securePassword;
 }
