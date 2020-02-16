@@ -9,31 +9,31 @@ function writePassword() {
 
 }
 
-// This function generate a secure password following characters criteria
+// The function below generates a secure password following characters criteria
 function generatePassword(){
-  var numberOfChar = prompt("Please, enter the desired number of characters");
+  var numberOfChar = prompt("Please, enter the desired password length (8 to 128 characters)");
   numberOfChar = Number(numberOfChar);
 
   if (Number.isInteger(numberOfChar)==false || numberOfChar<0){ // If the user's input length  is not a positive integer
-    alert("Password length should be a positive integer. Please try again!")
-    passwordText = document.querySelector("#password").innerHTML;// Password text reset
+    alert("Wrong entry: password length should be a positive integer. Please try again!")
+    passwordText = document.querySelector("#password").innerHTML;// password not displayed
     return passwordText;
   }
 
-  else if( numberOfChar==null) { // if the alert value is null
+  else if( numberOfChar==null) { // if the input value is null
     alert("You cancelled your secure password generation!")
-    passwordText = document.querySelector("#password").innerHTML;// Password text reset
+    passwordText = document.querySelector("#password").innerHTML;// Password not dispalayed
     return passwordText;
   }
   else if ((numberOfChar<8 || numberOfChar>128) && !(numberOfChar==null)){ // password length out of range 
-    alert("Your password should contains 8 characters minimum to 128 maximum . Please try again!")
-    passwordText = document.querySelector("#password").innerHTML;// Password text reset
+    alert("Wrong entry: your password should contains 8 characters minimum to 128 maximum . Please try again!")
+    passwordText = document.querySelector("#password").innerHTML;// Password not displayed
     return passwordText;
   } 
-  else { //Password length in range of [8,128] 
-    var alphaLower = []; // Lower case array
-    var alphaUpper = []; // Upper case array
-    var number = [0,1,2,3,4,5,6,7,8,9]; // digital characters array
+  else { //Password length in range: at least 8 characters and no more than 128 characters
+    var alphaLower = []; // Lower case type array
+    var alphaUpper = []; // Upper case type array
+    var number = [0,1,2,3,4,5,6,7,8,9]; // numeric type array
     var specialChar = ("!#$%&'()*+-/<=>?@[\]^_`{|}~").split(""); // Special characters array
       for (var i=0; i<26; i++){ // filling alphaLower and lphaUpper with alphabet using unicode
         var j=i+97;
@@ -43,7 +43,7 @@ function generatePassword(){
       }
 
 
-    // Merging user selected array in one big array
+    // Merging user selected character types in one big array
     alert("Select at least 3 types of caracters");
     var totalChar = []; // merger array
     var lowerChar = confirm("1-Lower case characters: a~z");
@@ -72,10 +72,10 @@ function generatePassword(){
     }
 
 
-    //User should chose 3 types of characters at least to generate a secure password
-    if (numOftypes<3){ // if less than 3 types of characters have been selected
+    //User should chose 3 character types at least to generate a secure password
+    if (numOftypes<3){ // if less than 3 character types have been selected
       alert("Your password must contains at least 3  types of characters. Please try again!")
-      passwordText = document.querySelector("#password").innerHTML;// Password text reset
+      passwordText = document.querySelector("#password").innerHTML;// Password not displayed
       return passwordText;
     }
     else { // at least 3 types of characters selected: password can be generated
@@ -87,7 +87,7 @@ function generatePassword(){
 
           // This part below checks if each secleted type has at least one character in the random password
           /*****************************************************************************************/
-          var passArray =securePassword.split(""); // converting the password strig in array 
+          var passArray =securePassword.split(""); // converting the password  characters list in an array 
           //Checking if at least 1  lower case character
           var checkLower=true;
           if (lowerChar===true) {
